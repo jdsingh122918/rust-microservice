@@ -14,9 +14,21 @@ name = "rust-microservice"
 
 
 [dependencies]
-actix-web = "4.2.1"
+actix-web = "4.2"
 tokio = { version = "1", features = ["macros", "rt-multi-thread"] }
 serde = { version = "1", features = ["derive"] }
+config = "0.13"
 
 [dev-dependencies]
-reqwest = "0.11.13"
+reqwest = "0.11"
+
+[dependencies.sqlx]
+version = "0.6"
+features = [
+    "runtime-tokio-rustls",
+    "macros",
+    "postgres",
+    "uuid",
+    "chrono",
+    "migrate"
+]

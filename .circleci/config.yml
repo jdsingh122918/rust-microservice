@@ -87,7 +87,7 @@ jobs:
           command: rustup component add clippy
       - run:
           name: Linting
-          command: cargo clippy -- -D warnings
+          command: cargo +nightly clippy -- -D warnings
 
   coverage:
     machine: true

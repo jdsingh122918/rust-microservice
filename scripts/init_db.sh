@@ -21,6 +21,8 @@ DB_PASSWORD="${POSTGRES_PASSWORD:=password}"
 DB_NAME="${POSTGRES_DB:=newsletter}"
 # Check if a custom port has been set, otherwise default to '5432'
 DB_PORT="${POSTGRES_PORT:=5432}"
+# Check if a custom host has been set, otherwise default to 'localhost'
+DB_HOST="${POSTGRES_HOST:=localhost}"
 
 # Launch postgres using Docker
 if [ [-z "${SKIP_DOCKER}"] ]; then
@@ -33,7 +35,7 @@ if [ [-z "${SKIP_DOCKER}"] ]; then
     postgres -N 1000
 fi
 
-until PG_PASSWORD="${DB_PASSWORD}" psql -h "${DB_HOST}" -U "${DB_USER}" -p "${DB_PORT}" -d "postgres" -c '\q'; do
+until PGPASSWORD="${DB_PASSWORD}" psql -h "${DB_HOST}" -U "${DB_USER}" -p "${DB_PORT}" -d "postgres" -c '\q'; do
   echo >&2 "Postgres is still unavailable - sleeping"
   sleep 1
 done
